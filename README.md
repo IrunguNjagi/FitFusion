@@ -1,6 +1,4 @@
-Sure! Here's a concise and attention-grabbing README file for your project:
 
----
 
 # FitGem: Your Personalized AI Health and Fitness Coach
 
