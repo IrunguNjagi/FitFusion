@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 Sure! Here's a concise and attention-grabbing README file for your project:
 
 ---
+=======
+
+>>>>>>> 4ba71c13f3d954ce91a0e5604a3503454866abfb
 
 # FitGem: Your Personalized AI Health and Fitness Coach
 
