@@ -48,6 +48,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 180.0),
+            child: Text(
+              ">>> SELECT YOUR TRAINING <<<",
+              style: TextStyle(
+                fontFamily: "Rufner",
+                fontStyle: FontStyle.italic,
+                color: Colors.black.withOpacity(0.5),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
           Expanded(
             child: PageView.builder(
               controller: _pageController,
@@ -61,15 +73,15 @@ class _HomePageState extends State<HomePage> {
                       double page = _pageController.page ??
                           _pageController.initialPage.toDouble();
                       value =
-                          (1 - ((page - index).abs() * 0.3)).clamp(0.0, 1.0);
+                          (1 - ((page - index).abs() * 0.3)).clamp(0.0, 0.8);
                     }
                     /*print('Rendering card at index $index with value $value');*/
                     return Center(
                       child: SizedBox(
                         height:
-                            Curves.easeOut.transform(value) * 400, // Max height
+                            Curves.easeOut.transform(value) * 500, // Max height
                         width:
-                            Curves.easeOut.transform(value) * 300, // Max width
+                            Curves.easeOut.transform(value) * 500, // Max width
                         child: child,
                       ),
                     );
