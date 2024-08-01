@@ -1,3 +1,4 @@
+import 'package:fit_fusion/pages/exercise_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -11,30 +12,22 @@ class _HomePageState extends State<HomePage> {
 
   final List<CardData> _cardDataList = [
     CardData(
-      title: 'Card 1',
-      description: 'This is the description for card 1.',
-      imageUrl: 'https://via.placeholder.com/300.png?text=Card+1',
+      title: 'Squats\n with\n Weight',
+      description: 'Feel the intensity with weight-based squats.',
+      imageUrl: 'assets/images/squat_bg.png',
+      kcal: 250,
+      time: 20,
+      burn: 95,
     ),
     CardData(
-      title: 'Card 2',
-      description: 'This is the description for card 2.',
-      imageUrl: 'https://via.placeholder.com/300.png?text=Card+2',
+      title: 'Squats with No Weight',
+      description: 'Feel the intensity with weight-based squats.',
+      imageUrl: 'https://via.placeholder.com/300.png?text=Squats+with+Weight',
+      kcal: 250,
+      time: 20,
+      burn: 95,
     ),
-    CardData(
-      title: 'Card 3',
-      description: 'This is the description for card 3.',
-      imageUrl: 'https://via.placeholder.com/300.png?text=Card+3',
-    ),
-    CardData(
-      title: 'Card 4',
-      description: 'This is the description for card 4.',
-      imageUrl: 'https://via.placeholder.com/300.png?text=Card+4',
-    ),
-    CardData(
-      title: 'Card 5',
-      description: 'This is the description for card 5.',
-      imageUrl: 'https://via.placeholder.com/300.png?text=Card+5',
-    ),
+    // Add more cards as needed with similar structure
   ];
 
   @override
@@ -70,18 +63,21 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, child) {
                     double value = 1.0;
                     if (_pageController.position.haveDimensions) {
-                      double page = _pageController.page ??
-                          _pageController.initialPage.toDouble();
-                      value =
-                          (1 - ((page - index).abs() * 0.3)).clamp(0.0, 0.8);
+                      value = (1 -
+                              ((_pageController.page ??
+                                              _pageController.initialPage
+                                                  .toDouble()) -
+                                          index)
+                                      .abs() *
+                                  0.3)
+                          .clamp(0.0, 1.0);
                     }
-                    /*print('Rendering card at index $index with value $value');*/
                     return Center(
                       child: SizedBox(
                         height:
                             Curves.easeOut.transform(value) * 500, // Max height
                         width:
-                            Curves.easeOut.transform(value) * 500, // Max width
+                            Curves.easeOut.transform(value) * 300, // Max width
                         child: child,
                       ),
                     );
@@ -127,11 +123,17 @@ class CardData {
   final String title;
   final String description;
   final String imageUrl;
+  final int kcal;
+  final int time; // Duration of the exercise in minutes
+  final int burn;
 
   CardData({
     required this.title,
     required this.description,
     required this.imageUrl,
+    required this.kcal,
+    required this.burn,
+    required this.time,
   });
 }
 
@@ -142,60 +144,97 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 4,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Background image
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: NetworkImage(data.imageUrl),
-                fit: BoxFit.cover,
-              ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExerciseDetailPage(
+              title: data.title,
+              imageUrl: data.imageUrl,
+              time: data.time,
+              burn: data.burn,
+              description: data.description,
             ),
           ),
-          // Information overlay
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                colors: [Colors.black.withOpacity(0.6), Colors.transparent],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+        );
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        elevation: 4,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // Background image
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: AssetImage(data.imageUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            padding: EdgeInsets.all(16),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    data.title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+            // Information overlay
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                bottom: 60,
+              ),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      data.title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Rufner',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    data.description,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                    SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.local_fire_department,
+                          color: Colors.orange,
+                        ),
+                        Text(
+                          '${data.kcal} kcal',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    /*Text(
+                      data.description,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),*/
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
