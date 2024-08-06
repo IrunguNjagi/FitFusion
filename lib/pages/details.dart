@@ -14,6 +14,11 @@ class _DetailsPageState extends State<DetailsPage> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
 
+  bool get _isFilled =>
+      _nameController.text.isNotEmpty &&
+      _ageController.text.isNotEmpty &&
+      _weightController.text.isNotEmpty;
+
   void _saveDetails() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('name', _nameController.text);
@@ -50,11 +55,10 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
             ),
           ),
-          const SizedBox(height: 30),
           Center(
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 280.0,
+                top: 320.0,
                 left: 43,
                 right: 43,
               ),
@@ -71,60 +75,61 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                       fillColor: Colors.white,
                       filled: true,
-                      border: OutlineInputBorder(
+                      border: UnderlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    onChanged: (_) => setState(() {}),
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   TextField(
                     controller: _ageController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Enter your age',
-                      labelStyle: const TextStyle(
+                      labelStyle: TextStyle(
                         fontFamily: 'Rufner',
                         color: Color(0xFF1D6B68),
                       ),
                       fillColor: Colors.white,
                       filled: true,
-                      border: OutlineInputBorder(
+                      border: UnderlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    onChanged: (_) => setState(() {}),
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   TextField(
                     controller: _weightController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Enter your weight(lbs)',
-                      labelStyle: const TextStyle(
+                      labelStyle: TextStyle(
                         fontFamily: 'Rufner',
                         color: Color(0xFF1D6B68),
                       ),
                       fillColor: Colors.white,
                       filled: true,
-                      border: OutlineInputBorder(
+                      border: UnderlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    onChanged: (_) => setState(() {}),
                   ),
                   const SizedBox(height: 120),
                   GestureDetector(
-                    onTap: () {
-                      _saveDetails();
-                    },
+                    onTap: _isFilled ? _saveDetails : null,
                     child: Container(
                       alignment: Alignment.center,
                       height: 55,
                       width: 292,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(57.0),
-                        color: const Color(0xFFF8C06D),
+                        color: _isFilled ? Color(0xFFF8C06D) : Colors.grey,
                       ),
                       child: const Text(
                         "COMPLETE",
