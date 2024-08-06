@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ExerciseDetailPage extends StatelessWidget {
   final String title;
@@ -32,23 +33,24 @@ class ExerciseDetailPage extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon:
+                      const Icon(Icons.arrow_back_ios_new, color: Colors.white),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               height: MediaQuery.of(context).size.height *
-                  0.5, // Makes the container taller
-              decoration: BoxDecoration(
-                color: Colors.white,
+                  0.57, // Makes the container taller
+              decoration: const BoxDecoration(
+                color: Color(0xFFFEF9F1),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
               ),
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -58,49 +60,72 @@ class ExerciseDetailPage extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Icon(Icons.timer, color: Colors.orange),
-                          SizedBox(height: 8),
-                          Text('$time min', style: TextStyle(fontSize: 16)),
+                          const Icon(Icons.timer, color: Colors.orange),
+                          const SizedBox(height: 8),
+                          Text(
+                            '$time min',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Rufner',
+                            ),
+                          ),
                         ],
                       ),
-                      Container(height: 30, width: 1, color: Colors.grey[300]),
+                      Container(
+                          height: 30, width: 4, color: const Color(0xFFDADADA)),
                       Column(
                         children: [
-                          Icon(Icons.local_fire_department,
+                          const Icon(Icons.local_fire_department,
                               color: Colors.orange),
-                          SizedBox(height: 8),
-                          Text('$burn kcal', style: TextStyle(fontSize: 16)),
+                          const SizedBox(height: 8),
+                          Text(
+                            '$burn kcal',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Rufner',
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 40),
                   Text(
                     title,
-                    style: TextStyle(
-                      fontFamily:
-                          'Rufner', // Assuming custom font is configured in the pubspec.yaml
-                      fontSize: 24,
+                    style: const TextStyle(
+                      fontFamily: 'Rufner',
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    description,
+                  const SizedBox(height: 20),
+                  const Text(
+                    'SQUATS WITH WEIGHT REALLY TARGET THE INNER QUAD\N'
+                    'THUS MAXIMIZING GAINS WITHIN A SHORT PERIOD OF TIME, SQUEEZE AT THE TOP \n',
                     style: TextStyle(
-                      fontSize: 16,
-                    ),
+                        fontSize: 16,
+                        fontFamily: 'Rufner',
+                        color: Color(0xFF939291)),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   MaterialButton(
-                    color: Colors.orange,
+                    color: const Color(0xFFF8C06D),
                     onPressed: () {},
-                    child: Text('Let\'s Workout',
-                        style: TextStyle(color: Colors.white)),
                     minWidth: double.infinity,
                     height: 50,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Text(
+                      'Let\'s Workout',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                        wordSpacing: 1.5,
+                        fontFamily: 'Candice',
+                      ),
                     ),
                   ),
                 ],

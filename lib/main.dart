@@ -1,3 +1,4 @@
+import 'package:fit_fusion/pages/details.dart';
 import 'package:fit_fusion/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 

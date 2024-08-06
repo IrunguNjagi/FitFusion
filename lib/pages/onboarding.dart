@@ -1,3 +1,4 @@
+import 'package:fit_fusion/pages/details.dart';
 import 'package:fit_fusion/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,7 @@ class Onboardingpage extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              "assets/images/Frame 2.png",
+              "assets/images/onboarding_bg.png",
               fit: BoxFit.cover,
             ),
           ),
@@ -20,10 +21,10 @@ class Onboardingpage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 40.0),
                 child: Center(
-                  child: const Text(
+                  child: Text(
                     "PUSH\n YOURSELF\n HARDER",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -40,8 +41,10 @@ class Onboardingpage extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailsPage()));
                     },
                     child: Container(
                         alignment: Alignment.center,
@@ -49,7 +52,7 @@ class Onboardingpage extends StatelessWidget {
                         width: 380,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.0),
-                          color: Color(0xFFF8C06D),
+                          color: const Color(0xFFF8C06D),
                         ),
                         child: Text(
                           "Get Started",

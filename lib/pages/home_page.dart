@@ -1,6 +1,7 @@
 import 'package:fit_fusion/pages/exercise_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,26 +9,54 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController _pageController = PageController(viewportFraction: 0.8);
+  PageController _pageController = PageController(viewportFraction: 0.9);
+
+  String greeting = '';
+  String name = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadNameAndGreeting();
+  }
+
+  void _loadNameAndGreeting() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String storedName = prefs.getString('name') ?? 'User';
+    setState(() {
+      name = storedName;
+      greeting = _getGreeting();
+    });
+  }
+
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning\n$name';
+    } else if (hour < 17) {
+      return 'Good Afternoon\n$name';
+    } else {
+      return 'Good Evening\n$name';
+    }
+  }
 
   final List<CardData> _cardDataList = [
     CardData(
-      title: 'Squats\n with\n Weight',
+      title: 'Squats with\n Weight',
       description: 'Feel the intensity with weight-based squats.',
-      imageUrl: 'assets/images/squat_bg.png',
+      imageUrl: 'assets/images/squat1_bg.png',
       kcal: 250,
       time: 20,
       burn: 95,
     ),
     CardData(
-      title: 'Squats with No Weight',
-      description: 'Feel the intensity with weight-based squats.',
-      imageUrl: 'https://via.placeholder.com/300.png?text=Squats+with+Weight',
+      title: 'Battle Rope\n Double Wave',
+      description: 'Feel the intensity with double wave ropes.',
+      imageUrl: 'assets/images/onboarding_bg.png',
       kcal: 250,
       time: 20,
       burn: 95,
     ),
-    // Add more cards as needed with similar structure
   ];
 
   @override
@@ -40,19 +69,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 180.0),
+            padding: const EdgeInsets.only(top: 80, left: 18.0),
             child: Text(
-              ">>> SELECT YOUR TRAINING <<<",
-              style: TextStyle(
-                fontFamily: "Rufner",
-                fontStyle: FontStyle.italic,
-                color: Colors.black.withOpacity(0.5),
-                fontWeight: FontWeight.w500,
+              greeting,
+              style: const TextStyle(
+                fontFamily: 'Rufner',
+                fontSize: 18.0,
+                color: Color(
+                  0xFF474747,
+                ),
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: Center(
+              child: Text(
+                ">>> SELECT YOUR TRAINING <<<",
+                style: TextStyle(
+                  fontFamily: "Rufner",
+                  fontStyle: FontStyle.italic,
+                  color: Colors.black.withOpacity(0.5),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 15),
           Expanded(
             child: PageView.builder(
               controller: _pageController,
@@ -75,9 +121,9 @@ class _HomePageState extends State<HomePage> {
                     return Center(
                       child: SizedBox(
                         height:
-                            Curves.easeOut.transform(value) * 500, // Max height
+                            Curves.easeOut.transform(value) * 950, // Max height
                         width:
-                            Curves.easeOut.transform(value) * 300, // Max width
+                            Curves.easeOut.transform(value) * 750, // Max width
                         child: child,
                       ),
                     );
@@ -92,8 +138,8 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        decoration: const BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
@@ -104,10 +150,10 @@ class _HomePageState extends State<HomePage> {
           gap: 8.0,
           backgroundColor: Colors.transparent,
           color: Colors.grey,
-          activeColor: Color(0xFFF8C06D),
+          activeColor: const Color(0xFFF8C06D),
           tabBackgroundColor: Colors.grey.shade800,
           padding: const EdgeInsets.all(18.0),
-          tabs: [
+          tabs: const [
             GButton(icon: Icons.home, text: "Home"),
             GButton(icon: Icons.sports_gymnastics, text: "AI"),
             GButton(icon: Icons.scuba_diving_rounded, text: "Routine"),
@@ -197,14 +243,14 @@ class CardWidget extends StatelessWidget {
                   children: [
                     Text(
                       data.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'Rufner',
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -214,7 +260,7 @@ class CardWidget extends StatelessWidget {
                         ),
                         Text(
                           '${data.kcal} kcal',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.orange,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
