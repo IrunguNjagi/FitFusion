@@ -30,7 +30,7 @@
     ```
 2. Navigate to the project directory:
     ```bash
-    cd FitGem
+    cd fit_fusion
     ```
 3. Install dependencies:
     ```bash
