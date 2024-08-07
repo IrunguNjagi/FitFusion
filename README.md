@@ -1,16 +1,18 @@
-<<<<<<< HEAD
-Sure! Here's a concise and attention-grabbing README file for your project:
-
----
-=======
-
->>>>>>> 4ba71c13f3d954ce91a0e5604a3503454866abfb
-
-# FitGem: Your Personalized AI Health and Fitness Coach
+# Fit Fusion: Your Personalized AI Health and Fitness Coach
 
 ## Overview
 
 **FitGem** is a cutting-edge Flutter app that leverages the power of Gemini AI to deliver personalized health and fitness plans. Designed to cater to individual needs, FitGem helps users achieve their fitness goals with customized workouts, nutrition plans, and real-time feedback.
+
+
+<div align="center">
+	<img width = "30%" src="assets/images/loading_sc.png">
+    <img width = "30%" src="assets/images/details_sc.png">
+    <img width = "30%" src="assets/images/homepage_sc.png">
+    
+</div>
+
+
 
 ## Features
 
@@ -24,7 +26,7 @@ Sure! Here's a concise and attention-grabbing README file for your project:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/FitGem.git
+    git clone https://github.com/IrunguNjagi/fit_fusion.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -45,15 +47,3 @@ Sure! Here's a concise and attention-grabbing README file for your project:
 2. **Profile Setup**: Enter your personal details and fitness goals.
 3. **Get Started**: Receive your personalized fitness and nutrition plans.
 4. **Track Progress**: Monitor your progress and get real-time feedback and adjustments.
-
-## Contributing
-
-We welcome contributions! Please fork the repository and create a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or feedback, please reach out to us at support@fitgem.com.
